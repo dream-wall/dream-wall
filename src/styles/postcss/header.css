@@ -1,0 +1,10 @@
+@charset "UTF-8";
+@import "./common/var.css";
+@component-namespace dw {
+  @b header {
+    @e top {
+      color: red;
+      transition: all .3s;
+    }
+  }
+}
