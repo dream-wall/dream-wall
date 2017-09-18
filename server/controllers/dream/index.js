@@ -1,26 +1,28 @@
 /**
- * Created by 胡志甫 on 2017/8/15.
+ * Created by 胡志甫 on 2017/9/18.
  */
-const _service=require('../../service');
-const dreamSequelize = require('../../models/index').dreams;
+var dreams = require('../../models/dreams');
+var _service = require('../../service');
 
 module.exports = {
 
-  getDreams:  async (ctx)=> {
-    let body={code:'01',result:''};
+  getDreams:  async (req,res,next)=> {
+    var body={code:'01',result:''};
     try{
-      let current = ctx.request.body.current_page || 1;
-      let page_size=ctx.request.body.page_size||10;
-      let condition = {
-        limit: [(current - 1) * page_size, +page_size],
+      var current = req.body.current_page || 1;
+      var page_size=req.body.page_size||10;
+      var options = {
+        current,
+        page_size,
+        find_con:{}
       }
-      let result = await _service.findAndCountAll(dreamSequelize, condition);
+      var result = await _service.findAndCountAll(dreams, options);
       body.result=result;
     }catch (e) {
       body.code='02';
       body.result=e.message;
     }finally {
-      ctx.body=body;
+      res.json(body);
     }
   },
 }

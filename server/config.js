@@ -1,15 +1,12 @@
 /**
- * Created by 胡志甫 on 2017/9/14.
+ * Created by 胡志甫 on 2017/9/18.
  */
 const config={
     appName:'dream-wall',
     host:'localhost',
-    port:3333,
+    port:3000,
     database: {
-        host: "localhost",
-        db: "dream-wall",
-        username: "root",
-        password: "123456"
+        db: "dream-wall"
     },
 }
 module.exports = config;

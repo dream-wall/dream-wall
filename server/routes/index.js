@@ -1,8 +1,9 @@
 /**
- * Created by 胡志甫 on 2017/9/14.
+ * Created by 胡志甫 on 2017/9/18.
  */
-const router = require('koa-router')();
+var express=require('express');
+var router = express.Router();
 
-const dreamsRouter = require('./dream')(router);
+var dreamsRouter = require('./dream')(router);
 
-module.exports = router.middleware();
+module.exports=router;

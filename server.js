@@ -1,40 +1,61 @@
 /**
- * Created by 胡志甫 on 2017/9/14.
+ * Created by 胡志甫 on 2017/9/18.
  */
-const Koa = require('koa')
-const cors = require('koa-cors');//跨域处理
-const bodyparser=require('koa-bodyparser');//传参获取
-const compress = require('koa-compress');//传输压缩
-const mount = require('koa-mount');//路由mount
-const convert = require('koa-convert');//generator 中间件在koa v2中需要用koa-convert封装一下才能使用，这与koa1不同
+var express = require('express');
+var bodyParser = require('body-parser');
+var path=require('path');
+var http = require('http');
+var mongoose = require('mongoose');
+var cors = require('cors');
+var fs=require('fs');
 
-const config=require('./server/config');
-const app = new Koa();
+var router=require('./server/routes');
+var config=require('./server/config')
+var app = express();
+var port = process.env.PORT || config.port;
 
-app.use(convert(bodyparser()));
-app.use(convert(compress({})));
-app.use(convert(cors()));
+//body 解析
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cors());
 
-app.use(async (ctx, next) => {
-    let start = new Date;
-    await next();
-    let ms = new Date - start;
-    console.log(`${ctx.method}, ${ctx.url}, ${ms}`);
-});
+// 将路由用至应用程式
+app.use('/api/v1', router);
 
-//错误监听
-app.on('error', (err, ctx)=> {
-    console.error('error', err);
-});
-//挂载路由
-app.use(mount('/api/v1', require('./server/routes')));
 
-/*
- const client=require('./server/models').client;
-const connection =  client.sync({
-    logging: console.log
-});同步表结构*/
+connect()
+    .on('error', console.log)
+    .on('disconnected', connect)
+    .once('open', listen);
 
-app.listen(config.port,() => {
-    console.log('%s BackEnd Server is running on: http://%s:%s', config.appName,config.host, config.port);
-});
+function listen () {
+    var httpServer = http.createServer(app);
+    httpServer.listen(port, '0.0.0.0', function () {
+        console.log('%s BackEnd Server is running on: http://%s:%s', config.appName,config.host, port);
+    });
+    httpServer.on('error', onError);
+}
+
+function connect () {
+
+    return mongoose.connect('mongodb://localhost/dream-wall').connection;
+}
+
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+    //处理特殊error 的友好信息
+    switch (error.code) {
+        case 'EACCES':
+            console.error('requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error('端口被占用!');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
