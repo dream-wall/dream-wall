@@ -12,6 +12,7 @@ npm run dev
 
 # 启动node后端项目(http://localhost:3333/...)
 npm run start
+```
 
 ## 我们的愿景：
 来到这里，每天早晨叫醒我们的将不是闹铃，而是梦想！
