@@ -10,7 +10,7 @@ npm install
 # 启动vue前端项目(http://localhost:8080/...)
 npm run dev
 
-# 启动node后端项目(http://localhost:3000/...)
+# 启动node后端项目(http://localhost:3333/...)
 npm run start
 ```
 
