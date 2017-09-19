@@ -1,5 +1,5 @@
 /**
- * Created by 胡志甫 on 2017/8/4.
+ * Created by 胡志甫 on 2017/9/14.
  */
 const config = require('../config');
 const fs = require('fs');
@@ -32,18 +32,17 @@ const client = new Sequelize(config.database.db, username, password, options);
 
 const models = {};
 
-// read all models and import them into the "db" object
 fs
     .readdirSync(__dirname + '/')
-    .filter(function (file) {
+    .filter((file)=> {
         return (file.indexOf('.') !== 0) && (file !== 'index.js');
     })
-    .forEach(function (file) {
+    .forEach((file)=> {
         let model = client.import(path.join(__dirname + '/', file));
         models[model.name] = model;
     });
 
-Object.keys(models).forEach(function (modelName) {
+Object.keys(models).forEach((modelName)=> {
     if (models[modelName].options.hasOwnProperty('associate')) {
         models[modelName].options.associate(models);
     }

@@ -1,5 +1,5 @@
 /**
- * Created by 胡志甫 on 2017/8/15.
+ * Created by 胡志甫 on 2017/9/14.
  */
 const _service=require('../../service');
 const dreamSequelize = require('../../models/index').dreams;
