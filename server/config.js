@@ -6,7 +6,9 @@ const config={
     host:'localhost',
     port:3000,
     database: {
-        db: "dream-wall"
+        db: "dream-wall",
+        host:'localhost',
+        
     },
 }
 module.exports = config;

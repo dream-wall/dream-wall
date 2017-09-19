@@ -36,9 +36,11 @@ function listen () {
     httpServer.on('error', onError);
 }
 
-function connect () {
-
-    return mongoose.connect('mongodb://localhost/dream-wall').connection;
+function  connect () {
+    mongoose.Promise = global.Promise; //resolve a bug that mpromise is deprecated,plug in your own promise library instead
+    return mongoose.connect('mongodb://'+config.database.host+'/'+config.database.db, {
+        useMongoClient: true,
+    });
 }
 
 function onError(error) {
