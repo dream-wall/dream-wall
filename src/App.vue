@@ -22,12 +22,28 @@ export default {
 
 <style lang="postcss">
 @import './styles/postcss/index.css';
+@reset-global pc;
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+html,
+body {
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  color: #201F1D;
+  font-size: 12px;
+  background: url(./assets/images/dw_dream_bg.jpg) repeat-y;
+  background-size: 100%;
 }
+
+a {
+  text-decoration: none;
+  color: #201F1D;
+}
+
 </style>
