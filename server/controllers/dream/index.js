@@ -14,6 +14,11 @@ module.exports = {
       let condition = {
         limit: [(current - 1) * page_size, +page_size],
       }
+      console.log('ctx',ctx.request.body)
+      if(ctx.request.body.sort){
+        (ctx.request.body.sort==='pop')&&(condition.order=[['watcher_nums','DESC']]);
+        (ctx.request.body.sort==='last')&&(condition.order=[['created_on','DESC']]);
+      }
       let result = await _service.findAndCountAll(dreamSequelize, condition);
       body.result=result;
     }catch (e) {

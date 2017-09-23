@@ -12,6 +12,7 @@ module.exports = function (sequelize, DataTypes) {
         watcher_nums:{type:DataTypes.INTEGER(10),allowNull:true,comment: '关注人数'},
         dream_person:{type:DataTypes.STRING(255),allowNull:true,comment: '追梦人'},
         img_url:{type:DataTypes.STRING(255),allowNull:true,comment: '图片路径'},
+        created_on: {type: DataTypes.DATE, allowNull: false, defaultValue: sequelize.fn('NOW'),comment:'梦想创建时间'},
     });
     return dreams;
 }
