@@ -28,5 +28,8 @@
       text-align: center;
       color: #716D6C;
     }
+    .dw-footer__author {
+      color: #551A8B;
+    }
   }
 }

@@ -104,18 +104,25 @@ export default {
     color: white;
     background-color: #79716E;
     border-radius: 50%;
+    cursor: pointer;
   }
   .dw-dream__tags--active {
     background-color: #C00C0B;
   }
   .dw-dream__list {
-    overflow: hidden;
     margin: 0 -8px;
+    @utils-clearfix;
   }
   .dw-dream__item {
     float: left;
     width: 262px;
-    padding: 0 8px 20px;
+    margin: 0 8px 20px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    &:hover {
+      transform: scale(1.04);
+      box-shadow: 1px 1px 10px 2px #EBEAE8;
+    }
   }
   .dw-dream__wrap {
     width: 242px;
@@ -160,10 +167,7 @@ export default {
     color: #757374;
   }
   .dw-dream__picture {
-    margin-left: 6px;
-  }
-  .dw-dream__view {
-    margin-right: 3px;
+    margin: 0 3px 0 6px;
   }
   .dw-dream__more {
     font-size: 16px;

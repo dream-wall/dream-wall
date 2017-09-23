@@ -8,12 +8,10 @@ Vue.axios.defaults.baseURL = 'http://localhost:3333/api/v1/'
 
 export default axios
 
-/* eslint-disabled  */
 export function fetch(url, params = {}) {
   return ajax('get', url, params)
 }
 
-/* eslint-disabled  */
 export function post(url, data = {}) {
   return ajax('post', url, data)
 }

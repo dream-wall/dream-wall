@@ -8,7 +8,7 @@
         <a class="dw-footer__link" href="">注册梦想</a>
       </div>
       <div class="dw-footer__copyright">
-        &copy; 2017 By Savoygu and Xueqianxun
+        &copy; 2017 By <a class="dw-footer__author" href="https://github.com/savoygu" target="_blank">Savoygu</a> and <a class="dw-footer__author" href="https://github.com/xunqianxue" target="_blank">Xueqianxun</a>
       </div>
     </div>
   </div>
