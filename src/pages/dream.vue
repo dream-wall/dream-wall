@@ -7,47 +7,98 @@
           <p class="dw-dream__slogan">这面墙，是一个梦想开始的地方。在这里，你将邂逅到所有美丽的梦想...</p>
         </div>
         <div class="dw-dream__tags">
-          <span class="dw-dream__lastest dw-dream__tags--active">最新</span>
-          <span class="dw-dream__hot">热门</span>
+          <span class="dw-dream__lastest"
+            :class="{ ' dw-dream__tags--active': sort === 'last' }"
+            @click="getDreams({page: 1, row, sort: 'last'})">最新</span>
+          <span class="dw-dream__hot"
+            :class="{ ' dw-dream__tags--active': sort === 'pop' }"
+            @click="getDreams({page: 1, row, sort: 'pop'})">热门</span>
         </div>
       </div>
-      <ul class="dw-dream__list">
-        <li class="dw-dream__item" v-for="dream in dreams" :key="dream.id">
-          <div class="dw-dream__wrap">
-            <img class="dw-dream__image" :src="require(`../assets/images/dream-list/${dream.img_url}`)" :alt="dream.dream_name">
-            <h3 class="dw-dream__title">{{dream.dream_name}}</h3>
-            <h4 class="dw-dream__user">{{dream.dream_person}}</h4>
-            <p class="dw-dream__time">达成时间：{{dream.plan_time}}</p>
-            <p class="dw-dream__task"><span>子任</span>务：{{dream.task_nums}}个</p>
-            <p class="dw-dream__percent"><span>完成</span>度：{{dream.complete_percentage}}%</p>
-            <p class="dw-dream__count">
-              <span class="dw-dream__picture iconfont icon-eye"> {{dream.pic_nums}}</span>
-              <span class="dw-dream__view iconfont icon-picture"> {{dream.watcher_nums}}</span>
-            </p>
-          </div>
-        </li>
-      </ul>
-      <div class="dw-dream__more">
-        体验更多梦想
-      </div>
+      <template v-if="dreams.length>0 && !loading">
+        <ul class="dw-dream__list">
+          <li class="dw-dream__item" v-for="dream in dreams" :key="dream.id">
+            <div class="dw-dream__wrap">
+              <img class="dw-dream__image" :src="require(`../assets/images/dream-list/${dream.img_url}`)" :alt="dream.dream_name">
+              <h3 class="dw-dream__title">{{dream.dream_name}}</h3>
+              <h4 class="dw-dream__user">{{dream.dream_person}}</h4>
+              <p class="dw-dream__time">达成时间：{{dream.plan_time}}</p>
+              <p class="dw-dream__task"><span>子任</span>务：{{dream.task_nums}}个</p>
+              <p class="dw-dream__percent"><span>完成</span>度：{{dream.complete_percentage}}%</p>
+              <p class="dw-dream__count">
+                <span class="dw-dream__picture iconfont icon-eye"> {{dream.watcher_nums}}</span>
+                <span class="dw-dream__view iconfont icon-picture"> {{dream.pic_nums}}</span>
+              </p>
+            </div>
+          </li>
+        </ul>
+        <div v-if="!end || more" class="dw-dream__more" @click="getDreams({page: ++page, row, sort: sort})">
+            <template v-if="!more">
+              体验更多梦想
+            </template>
+            <dw-loading v-else :loading="effect"></dw-loading>
+        </div>
+        <div v-else class="dw-dream__endline">
+          ------ 我也是有底线的 ------
+        </div>
+      </template>
+      <dw-loading v-else :loading="effect"></dw-loading>
     </div>
 </template>
 
 <script>
+import DwLoading from '@/components/loading'
 import {post} from '@/http'
+
 export default {
+  components: {
+    DwLoading
+  },
   data () {
     return {
-      dreams: []
+      dreams: [],
+      page: 1,
+      row: 12,
+      sort: 'last',
+      count: 1,
+      end: false,
+      loading: false,
+      more: false,
+      effect: Math.ceil(Math.random() * 8)
     }
   },
   methods: {
-    getDreams () {
+    getDreams ({page = 1, row = 12, sort = 'last'} = {}) {
+      if (this.end && sort === this.sort) return // 如果请求到最后一页 && 请求的是同一类别（最新或最热）
+      if (sort !== this.sort) { // 请求的是不同类别（说明做了切换最新和最热）
+        this.sort = sort
+        this.end = false
+        this.page = 1
+      }
+      if (page === 1) { // 首次加载动画
+        this.loading = true
+      } else { // 体验更多梦想加载动画
+        this.more = true
+      }
       post('dreams', {
-        current_page: 1,
-        page_size: 12
+        current_page: page,
+        page_size: row,
+        sort: sort
       }).then(res => {
-        this.dreams = res.result.rows
+        if (Math.ceil(res.result.count / this.row) === page) {
+          this.end = true
+        }
+        if (page === 1) {
+          setTimeout(_ => {
+            this.dreams = res.result.rows
+            this.loading = false
+          }, 1000)
+        } else {
+          setTimeout(_ => {
+            this.dreams.push.apply(this.dreams, res.result.rows)
+            this.more = false
+          }, 1000)
+        }
       })
     }
   },
@@ -169,10 +220,14 @@ export default {
   .dw-dream__picture {
     margin: 0 3px 0 6px;
   }
-  .dw-dream__more {
+  .dw-dream__more,
+  .dw-dream__endline {
     font-size: 16px;
+    height: 80px;
     text-align: center;
-    padding: 10px 0 30px 0;
+    padding: 10px 0 0;
+  },
+  .dw-dream__more {
     cursor: pointer;
   }
 }

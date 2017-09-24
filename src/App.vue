@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <dw-header></dw-header>
-    <router-view></router-view>
-    <dw-footer></dw-footer>
+    <div class="dw-app__container">
+      <dw-header></dw-header>
+      <div class="dw-app__main">
+        <router-view></router-view>
+      </div>
+    </div>
+    <div class="dw-app__footer">
+      <dw-footer></dw-footer>
+    </div>
   </div>
 </template>
 
@@ -46,4 +52,19 @@ a {
   color: #201F1D;
 }
 
+#app {
+  height: 100%;
+}
+
+.dw-app__container {
+  min-height: 100%;
+  height: auto !important;
+}
+.dw-app__main {
+  padding-bottom: 170px;
+}
+.dw-app__footer {
+  height: 170px;
+  margin-top: -170px;
+}
 </style>
