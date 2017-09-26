@@ -17,7 +17,7 @@
       </div>
       <template v-if="dreams.length>0 && !loading">
         <ul class="dw-dream__list">
-          <li class="dw-dream__item" v-for="dream in dreams" :key="dream.id">
+          <li class="dw-dream__item" v-for="(dream, index) in dreams" :key="dream.id">
             <div class="dw-dream__wrap">
               <img class="dw-dream__image" :src="require(`../assets/images/dream-list/${dream.img_url}`)" :alt="dream.dream_name">
               <h3 class="dw-dream__title">{{dream.dream_name}}</h3>
@@ -29,6 +29,10 @@
                 <span class="dw-dream__picture iconfont icon-eye"> {{dream.watcher_nums}}</span>
                 <span class="dw-dream__view iconfont icon-picture"> {{dream.pic_nums}}</span>
               </p>
+              <div class="dw-dream__hoting2" v-if="dream.watcher_nums > 10000">
+                <span class="dw-dream__hoting2--text">HOT</span>
+                <span class="dw-dream__hoting2--white"></span>
+              </div>
             </div>
           </li>
         </ul>
@@ -174,9 +178,12 @@ export default {
     &:hover {
       transform: scale(1.04);
       box-shadow: 1px 1px 10px 2px #EBEAE8;
+      // box-shadow: 0 8px 16px 0 rgba(7,17,27,.2);
     }
   }
   .dw-dream__wrap {
+    position: relative;
+    overflow: hidden;
     width: 242px;
     padding: 10px 10px 6px 10px;
     background-color: white;
@@ -227,9 +234,55 @@ export default {
     height: 80px;
     text-align: center;
     padding: 10px 0 0;
-  },
+  }
   .dw-dream__more {
     cursor: pointer;
+  }
+  .dw-dream__hoting {
+    position: absolute;
+    top: -28px;
+    right: -28px;
+    triangle: 28px right #F90102;
+    transform: rotate(-45deg);
+  }
+  .dw-dream__hoting--white {
+    position: absolute;
+    top: -11px;
+    right: -11px;
+    triangle: 11px right white;
+  }
+  .dw-dream__hoting--text {
+    position: absolute;
+    bottom: -7px;
+    right: 7px;
+    font-size: 12px;
+    color: white;
+    transform: rotate(90deg);
+  }
+  .dw-dream__hoting2 {
+    position: absolute;
+    right: -28px;
+    top: -28px;
+    width: 56px;
+    height: 56px;
+    background-color: #F90102;
+    transform: rotate(-45deg);
+  }
+  .dw-dream__hoting2--white {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    width: 22px;
+    height: 22px;
+    background-color: white;
+  }
+  .dw-dream__hoting2--text {
+    position: absolute;
+    top: 20px;
+    right: 34px;
+    font-size: 12px;
+    color: white;
+    transform: rotate(90deg);
   }
 }
 </style>
