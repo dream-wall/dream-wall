@@ -64,7 +64,7 @@ export default {
       end: false,
       loading: false,
       more: false,
-      effect: Math.ceil(Math.random() * 8)
+      effect: Math.ceil(Math.random() * 10)
     }
   },
   methods: {

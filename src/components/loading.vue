@@ -17,6 +17,17 @@
       <span></span>
       <span></span>
     </template>
+    <template v-if="loading === 10">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </template>
   </div>
 </template>
 
