@@ -59,7 +59,7 @@ export default {
       dreams: [],
       page: 1,
       row: 12,
-      sort: 'last',
+      sort: '',
       count: 1,
       end: false,
       loading: false,
@@ -69,6 +69,7 @@ export default {
   },
   methods: {
     getDreams ({page = 1, row = 12, sort = 'last'} = {}) {
+      if (page === 1 && sort === this.sort) return // 如果请求的是第一页 && 请求的是同一类别
       if (this.end && sort === this.sort) return // 如果请求到最后一页 && 请求的是同一类别（最新或最热）
       if (sort !== this.sort) { // 请求的是不同类别（说明做了切换最新和最热）
         this.sort = sort
