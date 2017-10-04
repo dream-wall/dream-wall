@@ -8,6 +8,7 @@ _service.findAndCountAll = async function (modelObj, options) {
     rows:await modelObj.find(options.find_con)
         .limit(options.page_size)
         .skip(options.page_size * (options.current-1))
+        .sort(options.sort_obj)
         .exec(),
     count:await modelObj.find(options.find_con).count()
   };

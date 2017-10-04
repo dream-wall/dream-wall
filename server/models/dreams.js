@@ -12,6 +12,7 @@ var DreamSchema = new Schema({
     pic_nums:Number,
     watcher_nums:Number,
     dream_person: { type : String, trim : true },
-    img_url: { type : String, trim : true }
+    img_url: { type : String, trim : true },
+    created_on:{ type: Date, default: Date.now}
 });
 module.exports =mongoose.model('dreams', DreamSchema);

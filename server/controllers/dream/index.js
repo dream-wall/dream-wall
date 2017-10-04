@@ -14,7 +14,8 @@ module.exports = {
       var options = {
         current,
         page_size,
-        find_con:{}
+        find_con:{},
+        sort_obj:{ pic_nums: -1 }
       }
       var result = await _service.findAndCountAll(dreams, options);
       body.result=result;
