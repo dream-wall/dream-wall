@@ -15,7 +15,11 @@ module.exports = {
         current,
         page_size,
         find_con:{},
-        sort_obj:{ pic_nums: -1 }
+        sort_obj:{}
+      }
+      if(req.body.sort){
+        (req.body.sort==='pop')&&(options.sort_obj={ watcher_nums: -1 });
+        (req.body.sort==='last')&&(options.sort_obj={ created_on: -1 });
       }
       var result = await _service.findAndCountAll(dreams, options);
       body.result=result;
