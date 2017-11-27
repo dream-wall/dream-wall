@@ -6,16 +6,15 @@
       <h1 class="dw-header__logo">Dreamsmile 筑梦社群</h1>
       <ul class="dw-header__list">
         <li class="dw-header__item"><a href="javascript:;">关于我们</a></li>
-        <li class="dw-header__item active"><a href="javascript:;">梦想墙</a></li>
+        <router-link :to="{path: 'dream'}" tag="li" class="dw-header__item"><a href="javascript:;">梦想墙</a></router-link>
         <li class="dw-header__item"><a href="javascript:;">APP下载</a></li>
-        <li class="dw-header__item"><a href="javascript:;">注册梦想</a></li>
+        <router-link :to="{path: 'signup'}" tag="li" class="dw-header__item"><a href="javascript:;">注册梦想</a>
+        </router-link>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+  export default {}
 </script>
