@@ -1,0 +1,41 @@
+@component-namespace dw {
+
+  @b signin {
+    width: 820px;
+    margin: 40px auto;
+    padding: 40px 0;
+    background-color: #fff;
+    box-shadow:0 3px 3px rgba(0,0,0,.2);
+    @utils-clearfix ;
+
+    @e main {
+      float: left;
+      width: 452px;
+      padding: 0 40px;
+      border-right: 2px solid #fafafa;
+      box-sizing: border-box;
+    }
+
+    @e aside {
+      float: left;
+      padding: 0 40px;
+    }
+
+    @e forward {
+      padding-top: 50px;
+      font-size: 16px;
+    }
+
+    @e login {
+      color: #35b558;
+    }
+
+    @e title {
+      margin-bottom: 20px;
+      line-height: 20px;
+      font-weight: normal;
+      font-size: 20px;
+      color: #333;
+    }
+  }
+}
