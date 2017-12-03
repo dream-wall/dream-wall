@@ -3,7 +3,7 @@
  */
 module.exports = function (sequelize, DataTypes) {
     let dreams = sequelize.define('dreams',{
-        id: {type: DataTypes.INTEGER(3), allowNull: false, primaryKey: true,comment: '主键ID'},
+        id: {type: DataTypes.INTEGER(3), allowNull: false, primaryKey: true,autoIncrement: true,comment: '主键ID'},
         dream_name:{type:DataTypes.STRING(255),allowNull:true,comment: '造梦名称'},
         plan_time:{type:DataTypes.STRING(255),allowNull:true,comment: '达成时间'},
         task_nums:{type:DataTypes.INTEGER(4),allowNull:true,comment: '任务数'},

@@ -9,8 +9,8 @@ module.exports = {
   getDreams:  async (ctx)=> {
     let body={code:'01',result:''};
     try{
-      let current = ctx.request.body.current_page || 1;
-      let page_size=ctx.request.body.page_size||10;
+      let current = ctx.request.body.current_page || ctx.request.query.current_page || 1;
+      let page_size=ctx.request.body.page_size || ctx.request.query.page_size || 10;
       let condition = {
         limit: [(current - 1) * page_size, +page_size],
       }
