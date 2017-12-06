@@ -32,6 +32,11 @@ export default new Router({
       path: '/signin',
       name: 'Signin',
       component: load('signin')
+    },
+    {
+      path: '/download',
+      name: 'Download',
+      component: load('download')
     }
   ]
 })
