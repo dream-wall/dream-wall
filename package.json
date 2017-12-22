@@ -10,7 +10,7 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "start": "node server.js"
+    "start": "node server/server.js"
   },
   "dependencies": {
     "axios": "^0.16.2",

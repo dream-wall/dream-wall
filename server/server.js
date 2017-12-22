@@ -8,7 +8,7 @@ const compress = require('koa-compress');// 传输压缩
 const mount = require('koa-mount');// 路由mount
 const convert = require('koa-convert');// generator 中间件在koa v2中需要用koa-convert封装一下才能使用，这与koa1不同
 
-const config = require('./server/config');
+const config = require('./config');
 const app = new Koa();
 
 app.use(convert(bodyparser()));
@@ -27,7 +27,7 @@ app.on('error', (err, ctx) => {
   console.error('error', err);
 });
 // 挂载路由
-app.use(mount('/api/v1', require('./server/routes')));
+app.use(mount('/api/v1', require('./routes')));
 
 /*
  const client=require('./server/models').client;
