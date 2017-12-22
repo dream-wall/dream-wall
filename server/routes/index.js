@@ -3,7 +3,7 @@
  */
 const router = require('koa-router')();
 
-const dreamsRouter = require('./dream')(router);
-const usersRouter = require('./user')(router);
+require('./dream')(router);
+require('./user')(router);
 
 module.exports = router.middleware();
