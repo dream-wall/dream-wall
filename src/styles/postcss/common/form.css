@@ -1,0 +1,70 @@
+@component-namespace dw {
+
+  @b form {
+
+    @e group {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    @e control {
+      width: 100%;
+      height: 40px;
+      line-height: 18px;
+      padding: 11px;
+      background-color: #fff;
+      border: 1px solid #e4e4e4;
+      box-sizing: border-box;
+
+      @when error {
+        border-color: #ff6711;
+      }
+
+      &:focus {
+         border-color: #35b558;
+         box-shadow: 0 0 5px #51cc73;
+
+        @when error {
+          border-color: #35b558;
+        }
+      }
+    }
+
+    @e button {
+      display: inline-block;
+      width: 100%;
+      height: 40px;
+      padding: 0;
+      font-size: 18px;
+      text-align: center;
+      background: #35b558;
+      border: 1px solid #35b558;
+      color: #fff;
+      cursor: pointer;
+
+    &:hover {
+       background: #51cc73;
+       border-color: #51cc73;
+     }
+    }
+
+    @e tip {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 40px;
+      z-index: 20;
+
+      @m error {
+        display: block;
+        height: 26px;
+        line-height: 26px;
+        margin: 7px 7px 0 0;
+        padding: 0 5px;
+        color: #fff;
+        background-color: #ff5c00;
+        border-radius: 2px;
+      }
+    }
+  }
+}

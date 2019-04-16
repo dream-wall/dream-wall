@@ -1,0 +1,54 @@
+@charset "UTF-8";
+@import "./common/var.css";
+@component-namespace dw {
+  @b header {
+    @e wave {
+      width: 100%;
+      height: 42px;
+      background: radial-gradient(circle at 50% 50%, #fff 0, #fff 50%, transparent 0);
+      background-repeat: repeat-x;
+      background-color: #030200;
+      background-size: 10px 12px;
+      background-position: -20px 37px;
+    }
+    @e nav {
+      display: flex;
+      justify-content: space-between;
+      width: 1096px;
+      height: 68px;
+      line-height: 68px;
+      margin: 0 auto;
+      border-bottom: 1px dashed #7D7C7A;
+    }
+    @e logo {
+      margin-left: 28px;
+      font-size: 28px;
+    }
+    @e list {
+      display: flex;
+      margin-right: -20px;
+      margin-top: -10px;
+      margin-bottom: -1px;
+      line-height: 78px;
+    }
+    @e item {
+      padding: 0 20px;
+      cursor: pointer;
+      a {
+        transition: color .1s ease-in-out;
+      }
+      &:hover,
+      &.active {
+        padding: 0;
+        background-color: #000000;
+        transform: skew(-15deg);
+        a {
+          display: inline-block;
+          padding: 0 20px;
+          color: white;
+          transform: skew(15deg);
+        }
+      }
+    }
+  }
+}
